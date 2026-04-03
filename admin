@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unloan | Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF; --secondary: #00D2D3; --dark: #1e272e;
+            --success: #1DD1A1; --warning: #FFA502; --danger: #FF4757;
+            --gradient-primary: linear-gradient(135deg, #6C63FF 0%, #00D2D3 100%);
+            --shadow-lg: 0 15px 40px rgba(108, 99, 255, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; }
+        .admin-container { max-width: 1400px; margin: 0 auto; padding: 30px; }
+        .header { background: white; padding: 25px 40px; border-radius: 20px; box-shadow: var(--shadow-lg); margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 32px; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 30px; border-radius: 20px; box-shadow: var(--shadow-lg); text-align: center; }
+        .stat-icon { width: 60px; height: 60px; border-radius: 15px; background: var(--gradient-primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 15px; }
+        .stat-value { font-size: 36px; font-weight: 800; color: var(--dark); }
+        .stat-label { font-size: 14px; color: #888; margin-top: 5px; }
+        .data-table-container { background: white; border-radius: 20px; box-shadow: var(--shadow-lg); overflow: hidden; }
+        .table-header { padding: 25px 40px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .config-section { background: #f8f9fa; padding: 20px; border-radius: 15px; margin-bottom: 20px; }
+        .config-section input { padding: 10px; border: 2px solid #ddd; border-radius: 8px; margin: 5px; width: 250px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f8f9fa; padding: 20px; text-align: left; font-weight: 600; color: var(--dark); font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { padding: 20px; border-bottom: 1px solid #eee; font-size: 14px; }
+        tr:hover { background: rgba(108, 99, 255, 0.05); }
+        .score-badge { padding: 6px 15px; border-radius: 20px; font-weight: 700; font-size: 12px; }
+        .score-high { background: rgba(29, 209, 161, 0.15); color: var(--success); }
+        .score-medium { background: rgba(255, 165, 2, 0.15); color: var(--warning); }
+        .score-low { background: rgba(255, 71, 87, 0.15); color: var(--danger); }
+        .btn { padding: 12px 24px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background: var(--gradient-primary); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3); }
+        .export-btn { background: var(--success); color: white; padding: 12px 24px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .export-btn:hover { background: #17a882; }
+        .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .login-box { background: white; padding: 50px; border-radius: 30px; width: 100%; max-width: 450px; text-align: center; }
+        .login-box input { width: 100%; padding: 16px; border: 2px solid #eee; border-radius: 12px; font-size: 16px; margin: 20px 0; }
+        .hidden { display: none; }
+        .loading { text-align: center; padding: 60px; }
+        .loading i { font-size: 48px; color: var(--primary); animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+        <div class="logo" style="margin-bottom: 20px;">unloan<span style="-webkit-text-fill-color: var(--dark);">.</span> Admin</div>
+        <h2 style="margin-bottom: 10px;">Admin Access</h2>
+        <p style="color: #888;">Enter your admin password</p>
+        <input type="password" id="adminPassword" placeholder="Password">
+        <button class="btn btn-primary" style="width: 100%;" onclick="verifyAdmin()">
+            <i class="fas fa-lock"></i> Login
+        </button>
+        <p id="loginError" style="color: var(--danger); margin-top: 15px; display: none;">❌ Incorrect password</p>
+    </div>
+</div>
+
+<!-- Admin Dashboard -->
+<div class="admin-container hidden" id="adminDashboard">
+    <div class="header">
+        <div class="logo">unloan<span style="-webkit-text-fill-color: var(--dark);">.</span> Admin</div>
+        <button class="btn" onclick="logout()" style="background: #eee;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div class="config-section">
+        <h3><i class="fas fa-cog"></i> GitHub Configuration</h3>
+        <p style="color: #888; margin-bottom: 15px; font-size: 13px;">Enter your GitHub repo details to fetch user data</p>
+        <input type="text" id="ghUsername" placeholder="GitHub Username">
+        <input type="text" id="ghRepo" placeholder="Repository Name" value="unloan-data">
+        <input type="text" id="ghToken" placeholder="Personal Access Token">
+        <input type="text" id="ghBranch" placeholder="Branch" value="main">
+        <button class="btn btn-primary" onclick="loadUserData()"><i class="fas fa-sync"></i> Load Data</button>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-value" id="totalUsers">0</div>
+            <div class="stat-label">Total Users</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="stat-value" id="avgScore">0</div>
+            <div class="stat-label">Avg Health Score</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-rupee-sign"></i></div>
+            <div class="stat-value" id="avgIncome">₹0</div>
+            <div class="stat-label">Avg Income</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
+            <div class="stat-value" id="totalGoals">0</div>
+            <div class="stat-label">Active Goals</div>
+        </div>
+    </div>
+
+    <div class="data-table-container">
+        <div class="table-header">
+            <h3><i class="fas fa-table"></i> User Submissions</h3>
+            <div style="display: flex; gap: 10px;">
+                <button class="export-btn" onclick="exportAllData()"><i class="fas fa-file-csv"></i> Export CSV</button>
+                <button class="export-btn" style="background: var(--primary);" onclick="viewOnGitHub()"><i class="fab fa-github"></i> View on GitHub</button>
+            </div>
+        </div>
+        <div id="tableLoading" class="loading hidden">
+            <i class="fas fa-spinner"></i>
+            <p style="margin-top: 20px; color: #888;">Loading user data from GitHub...</p>
+        </div>
+        <div id="tableContent" style="overflow-x: auto;">
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Mobile</th>
+                        <th>Income</th>
+                        <th>Expenses</th>
+                        <th>Disposable</th>
+                        <th>Goals</th>
+                        <th>Score</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ADMIN_PASSWORD = 'unloan2024';
+    let allUserData = [];
+
+    function verifyAdmin() {
+        const password = document.getElementById('adminPassword').value;
+        if (password === ADMIN_PASSWORD) {
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+            localStorage.setItem('unloanAdminAuth', 'true');
+            loadUserData();
+        } else {
+            document.getElementById('loginError').style.display = 'block';
+        }
+    }
+
+    if (localStorage.getItem('unloanAdminAuth') === 'true') {
+        document.getElementById('loginOverlay').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        loadUserData();
+    }
+
+    function logout() {
+        localStorage.removeItem('unloanAdminAuth');
+        location.reload();
+    }
+
+    async function loadUserData() {
+        const username = document.getElementById('ghUsername').value;
+        const repo = document.getElementById('ghRepo').value;
+        const token = document.getElementById('ghToken').value;
+        const branch = document.getElementById('ghBranch').value;
+
+        if (!username || !token) {
+            alert('Please enter GitHub Username and Token');
+            return;
+        }
+
+        document.getElementById('tableLoading').classList.remove('hidden');
+        document.getElementById('tableContent').classList.add('hidden');
+
+        try {
+            const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/submissions.json?ref=${branch}`, {
+                headers: {
+                    'Authorization': `token ${token}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data. Check repo name and token.');
+            }
+
+            const data = await response.json();
+            const content = atob(data.content);
+            allUserData = JSON.parse(content);
+
+            renderTable();
+            updateStats();
+        } catch (error) {
+            alert('Error: ' + error.message);
+            document.getElementById('tableLoading').innerHTML = `
+                <i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i>
+                <p style="margin-top: 20px; color: #888;">${error.message}</p>
+            `;
+        } finally {
+            document.getElementById('tableLoading').classList.add('hidden');
+            document.getElementById('tableContent').classList.remove('hidden');
+        }
+    }
+
+    function renderTable() {
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+
+        allUserData.forEach((user, index) => {
+            const scoreClass = user.ai?.score > 70 ? 'score-high' : (user.ai?.score > 40 ? 'score-medium' : 'score-low');
+            const goalsCount = user.milestones?.length || 0;
+            const date = user.timestamp ? new Date(user.timestamp).toLocaleDateString() : 'N/A';
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${date}</td>
+                <td><strong>${user.name || 'N/A'}</strong></td>
+                <td>${user.age || '-'}</td>
+                <td>${user.mobile || '-'}</td>
+                <td>₹${(user.income || 0).toLocaleString('en-IN')}</td>
+                <td>₹${(user.totalExpenses || 0).toLocaleString('en-IN')}</td>
+                <td style="color: ${user.disposable > 0 ? 'var(--success)' : 'var(--danger)'}">₹${(user.disposable || 0).toLocaleString('en-IN')}</td>
+                <td>${goalsCount}</td>
+                <td><span class="score-badge ${scoreClass}">${user.ai?.score || 0}</span></td>
+                <td>
+                    <button class="btn" style="padding: 8px 15px; background: #eee;" onclick="viewUser(${index})">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function updateStats() {
+        document.getElementById('totalUsers').innerText = allUserData.length;
+        const avgScore = allUserData.reduce((sum, user) => sum + (user.ai?.score || 0), 0) / (allUserData.length || 1);
+        document.getElementById('avgScore').innerText = Math.round(avgScore);
+        const avgIncome = allUserData.reduce((sum, user) => sum + (user.income || 0), 0) / (allUserData.length || 1);
+        document.getElementById('avgIncome').innerText = '₹' + Math.round(avgIncome).toLocale
