@@ -808,44 +808,37 @@
     async function saveToGitHub() {
         if (isSubmittingToSheets) return false;
         isSubmittingToSheets = true;
-        console.log('📤 Sending to GitHub...');
-        if (!GITHUB_CONFIG.token || GITHUB_CONFIG.token === 'YOUR_PERSONAL_ACCESS_TOKEN') {
-            console.warn('⚠️ GitHub token not configured - saving locally only');
-            localStorage.setItem('unloanLastSync', new Date().toISOString());
-            isSubmittingToSheets = false;
-            return false;
-        }
+        console.log('📤 Sending to backend...');
         try {
-            let existingData = [];
-            try {
-                const getResponse = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repo}/contents/submissions.json?ref=${GITHUB_CONFIG.branch}`, {
-                    headers: { 'Authorization': `token ${GITHUB_CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json' }
-                });
-                let fileSha = null; //added
-                if (getResponse.ok) {
-                    const getData = await getResponse.json();
-                    fileSha = getData.sha;   // added
-                    const content = decodeURIComponent(escape(atob(getData.content))); //changed
-                    existingData = JSON.parse(content);
+            const response = await fetch(
+                "https://unloan-backend.onrender.com/save",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        data: userData
+                    })
                 }
-            } catch (e) { console.log('No existing file, creating new one'); }
-            userData.timestamp = new Date().toISOString();
-            existingData.push(userData);
-            const content = btoa(unescape(encodeURIComponent(JSON.stringify(existingData, null, 2))));  //changed
-            await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repo}/contents/submissions.json`, {
-                method: 'PUT',
-                headers: { 'Authorization': `token ${GITHUB_CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: `New submission from ${userData.name}`, content: content, sha: fileSha, branch: GITHUB_CONFIG.branch }) //changed
-            });
-            console.log('✅ GitHub save complete');
-            localStorage.setItem('unloanLastSync', new Date().toISOString());
-            return true;
+            );
+            const result = await response.json();
+            if (result.status === "success") {
+                console.log("✅ Saved successfully via backend");
+                localStorage.setItem('unloanLastSync', new Date().toISOString());
+                return true;
+            } else {
+                console.error("❌ Backend error:", result);
+                throw new Error(result.message || "Backend failed");
+            }
         } catch (error) {
-            console.warn('⚠️ GitHub save failed:', error.message);
-            localStorage.setItem('unloanLastSync', new Date().toISOString());
+            console.warn("⚠️ Save failed:", error.message);
             return false;
-        } finally { isSubmittingToSheets = false; }
+        } finally {
+            isSubmittingToSheets = false;
+        }
     }
+
 
     function exportToCSV() {
         const data = userData;
