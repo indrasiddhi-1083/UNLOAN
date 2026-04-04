@@ -817,7 +817,15 @@
                     })
                 }
             );
-            const result = await response.json();
+            const text = await response.text();
+console.log("🔍 RAW RESPONSE:", text);
+
+let result;
+try {
+    result = JSON.parse(text);
+} catch (e) {
+    throw new Error("Invalid JSON from backend");
+}
             if (result.status === "success") {
                 console.log("✅ Saved successfully via backend");
                 localStorage.setItem('unloanLastSync', new Date().toISOString());
