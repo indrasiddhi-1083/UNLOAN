@@ -510,12 +510,7 @@
 </div>
 
 <script>
-    const GITHUB_CONFIG = {
-        username: 'indrasiddhi-1083',
-        repo: 'unloan-data',
-        token: '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',
-        branch: 'main'
-    };
+    
     
     let isSubmittingToSheets = false;
     let userData = {};
@@ -857,15 +852,32 @@
     }
 
     async function saveAndFinish() {
-        localStorage.setItem('unloanData', JSON.stringify(userData));
-        const saveBtn = document.querySelector('button[onclick="saveAndFinish()"]');
-        const originalText = saveBtn ? saveBtn.innerHTML : '';
-        if (saveBtn) { saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...'; saveBtn.disabled = true; }
-        const cloudSuccess = await saveToGitHub();
-        if (cloudSuccess) { alert('✅ Data saved to GitHub!\n\nView at: https://github.com/' + GITHUB_CONFIG.username + '/' + GITHUB_CONFIG.repo); }
-        else { alert('⚠️ Cloud sync failed\n\n✅ Data saved LOCALLY on this device.'); }
-        if (saveBtn) { saveBtn.innerHTML = originalText; saveBtn.disabled = false; }
-    }
+localStorage.setItem('unloanData', JSON.stringify(userData));
+
+const saveBtn = document.querySelector('button[onclick="saveAndFinish()"]');
+const originalText = saveBtn ? saveBtn.innerHTML : '';
+
+if (saveBtn) {
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    saveBtn.disabled = true;
+}
+
+const cloudSuccess = await saveToGitHub();
+
+if (cloudSuccess) {
+    alert('✅ Data saved successfully!');
+} else {
+    alert('⚠️ Cloud sync failed\n\n✅ Data saved locally on this device.');
+}
+
+if (saveBtn) {
+    saveBtn.innerHTML = originalText;
+    saveBtn.disabled = false;
+}
+
+
+}
+
 
     window.addEventListener('error', (e) => { console.error('💥 GLOBAL ERROR:', e.message); });
     window.addEventListener('unhandledrejection', (e) => { console.error('💥 UNHANDLED PROMISE:', e.reason); });
