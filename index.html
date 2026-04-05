@@ -28,34 +28,34 @@
             --radius-sm: 12px; --radius-md: 20px; --radius-lg: 30px; --radius-xl: 40px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: var(--dark); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; overflow-x: hidden; }
-        body::before { content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(108, 99, 255, 0.05) 0%, transparent 70%); animation: rotate 30s linear infinite; z-index: -1; }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: var(--dark); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; overflow: hidden; }
+        body::before { content: ''; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(108, 99, 255, 0.05) 0%, transparent 70%); animation: rotate 20s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .app-container { background: var(--white); width: 100%; max-width: 450px; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow: hidden; position: relative; min-height: 800px; max-height: 90vh; display: flex; flex-direction: column; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.5); }
-        header { padding: 25px 30px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(108, 99, 255, 0.1); position: sticky; top: 0; z-index: 100; flex-shrink: 0; }
+        .app-container { background: var(--white); width: 100%; max-width: 450px; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); overflow: hidden; position: relative; min-height: 800px; display: flex; flex-direction: column; }
+        header { padding: 25px 30px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(108, 99, 255, 0.1); position: sticky; top: 0; z-index: 100; }
         .logo-container { display: flex; align-items: center; justify-content: center; gap: 12px; }
-        .logo-icon { width: 45px; height: 45px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; box-shadow: var(--shadow-md); }
+        .logo-icon { width: 45px; height: 45px; background: var(--gradient-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; }
         .logo { font-size: 28px; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
         .logo span { color: var(--dark); -webkit-text-fill-color: var(--dark); }
-        .screen { padding: 30px; flex: 1; display: none; flex-direction: column; animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--primary) var(--light); }
+        .screen { padding: 30px; flex: 1; display: none; flex-direction: column; animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; }
         .screen.active { display: flex; }
         @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; color: var(--dark); letter-spacing: -0.5px; flex-shrink: 0; }
+        h2 { font-size: 26px; font-weight: 700; margin-bottom: 8px; color: var(--dark); letter-spacing: -0.5px; }
         h3 { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: var(--dark); }
-        p.subtitle { font-size: 14px; color: var(--gray); margin-bottom: 30px; line-height: 1.6; font-weight: 400; flex-shrink: 0; }
+        p.subtitle { font-size: 14px; color: var(--gray); margin-bottom: 30px; line-height: 1.6; font-weight: 400; }
         .form-group { margin-bottom: 20px; position: relative; }
         .form-row { display: flex; align-items: center; gap: 10px; }
         .form-row input { flex: 1; }
-        .frequency-tag { background: var(--light); padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; flex-shrink: 0; }
+        .frequency-tag { background: var(--light); padding: 8px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
         .frequency-tag.monthly { background: rgba(108, 99, 255, 0.1); color: var(--primary); }
         .frequency-tag.yearly { background: rgba(29, 209, 161, 0.1); color: var(--success); }
         .frequency-tag.one-time { background: rgba(255, 165, 2, 0.1); color: var(--warning); }
         label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 10px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; }
-        input, select { width: 100%; padding: 16px 20px; border: 2px solid #e1e5eb; border-radius: var(--radius-md); font-size: 16px; background: var(--light); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; }
+        input, select { width: 100%; padding: 16px 20px; border: 2px solid #e1e5eb; border-radius: var(--radius-md); font-size: 16px; background: var(--light); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         input:focus, select:focus { border-color: var(--primary); outline: none; background: var(--white); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
         input::placeholder { color: #a4b0be; }
-        .btn { width: 100%; padding: 18px 24px; border: none; border-radius: var(--radius-md); background: var(--gradient-primary); color: white; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-md); margin-top: 15px; position: relative; overflow: hidden; letter-spacing: 0.3px; flex-shrink: 0; }
-        .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
+        .btn { width: 100%; padding: 18px 24px; border: none; border-radius: var(--radius-md); background: var(--gradient-primary); color: white; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+        .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s; }
         .btn:hover::before { left: 100%; }
         .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
         .btn:active { transform: translateY(-1px) scale(0.98); }
@@ -65,13 +65,13 @@
         .btn-sm { width: auto; padding: 12px 20px; font-size: 13px; margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; }
         .card { background: var(--gradient-card); border-radius: var(--radius-lg); padding: 25px; margin-bottom: 20px; box-shadow: var(--shadow-sm); border: 1px solid rgba(108, 99, 255, 0.08); transition: all 0.3s ease; }
         .card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
-        .section-header { display: flex; align-items: center; gap: 15px; margin: 30px 0 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(108, 99, 255, 0.1); flex-shrink: 0; }
+        .section-header { display: flex; align-items: center; gap: 15px; margin: 30px 0 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(108, 99, 255, 0.1); }
         .section-header:first-child { margin-top: 10px; }
-        .section-number { width: 40px; height: 40px; border-radius: 12px; background: var(--gradient-primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; box-shadow: var(--shadow-md); flex-shrink: 0; }
+        .section-number { width: 40px; height: 40px; border-radius: 12px; background: var(--gradient-primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; }
         .section-header h3 { margin: 0; font-size: 18px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 10px; }
         .score-display { text-align: center; padding: 10px; }
-        .score-circle-large { width: 120px; height: 120px; border-radius: 50%; background: var(--gradient-primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 42px; font-weight: 800; margin: 0 auto 15px; box-shadow: var(--shadow-glow); position: relative; }
-        .score-circle-large::after { content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px; border-radius: 50%; border: 3px dashed rgba(108, 99, 255, 0.3); animation: rotate 15s linear infinite; }
+        .score-circle-large { width: 120px; height: 120px; border-radius: 50%; background: var(--gradient-primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 800; margin: 0 auto 15px; position: relative; }
+        .score-circle-large::after { content: ''; position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px; border-radius: 50%; border: 3px dashed rgba(108, 99, 255, 0.3); animation: rotate 3s linear infinite; }
         .score-label { font-size: 14px; font-weight: 600; color: var(--gray); margin-bottom: 20px; }
         .score-range { max-width: 300px; margin: 0 auto; }
         .range-bar { height: 12px; background: linear-gradient(90deg, #FF4757 0%, #FFA502 50%, #1DD1A1 100%); border-radius: 10px; position: relative; overflow: hidden; }
@@ -96,7 +96,7 @@
         .insurance-name { font-weight: 600; font-size: 14px; color: var(--dark); }
         .insurance-status { font-size: 12px; color: var(--gray); margin-top: 3px; }
         .insurance-action { font-size: 12px; font-weight: 600; color: var(--primary); background: rgba(108, 99, 255, 0.1); padding: 8px 12px; border-radius: 8px; }
-        .investment-recommendation-box { background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(0, 210, 211, 0.1) 100%); padding: 20px; border-radius: var(--radius-md); text-align: center; border: 1px solid rgba(108, 99, 255, 0.2); margin-top: 20px; }
+        .investment-recommendation-box { background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(0, 210, 211, 0.1) 100%); padding: 20px; border-radius: var(--radius-md); text-align: center; margin-top: 20px; }
         .rec-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); font-weight: 600; }
         .rec-amount { font-size: 32px; font-weight: 800; color: var(--primary); margin: 8px 0; }
         .rec-detail { font-size: 13px; color: var(--gray); }
@@ -113,7 +113,7 @@
         .investment-card-short { border-top: 4px solid var(--warning); }
         .investment-card-long { border-top: 4px solid var(--success); }
         .investment-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
-        .investment-type-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 6px 12px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+        .investment-type-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 6px 12px; border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
         .tag-short { background: rgba(255, 165, 2, 0.15); color: var(--warning); }
         .tag-long { background: rgba(29, 209, 161, 0.15); color: var(--success); }
         .tag-urgent { background: rgba(255, 71, 87, 0.15); color: var(--danger); }
@@ -129,7 +129,7 @@
         .progress-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: shimmer 2s infinite; }
         @keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
         .progress-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--gray); margin-top: 8px; font-weight: 500; }
-        .investment-action-box { background: rgba(29, 209, 161, 0.1); color: var(--success); padding: 12px 15px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+        .investment-action-box { background: rgba(29, 209, 161, 0.1); color: var(--success); padding: 12px 15px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
         .investment-instruments { margin-top: 15px; }
         .instrument-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; font-weight: 600; }
         .instrument-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -141,28 +141,28 @@
         .summary-item span:last-child { font-weight: 600; }
         .summary-total { display: flex; justify-content: space-between; padding: 15px 0 0; margin-top: 10px; font-size: 18px; font-weight: 800; border-top: 2px solid rgba(255, 255, 255, 0.3); }
         .summary-total span:last-child { color: var(--secondary); font-size: 24px; }
-        .sync-status { text-align: center; font-size: 12px; padding: 10px; border-radius: var(--radius-sm); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(108, 99, 255, 0.05); flex-shrink: 0; }
+        .sync-status { text-align: center; font-size: 12px; padding: 10px; border-radius: var(--radius-sm); margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .sync-success { color: var(--success); background: rgba(29, 209, 161, 0.1); }
         .sync-pending { color: var(--warning); background: rgba(255, 165, 2, 0.1); }
         .sync-error { color: var(--danger); background: rgba(255, 71, 87, 0.1); }
-        .alert { padding: 15px 20px; border-radius: var(--radius-md); margin-bottom: 20px; font-size: 14px; display: flex; align-items: center; gap: 12px; animation: slideIn 0.3s ease; flex-shrink: 0; }
+        .alert { padding: 15px 20px; border-radius: var(--radius-md); margin-bottom: 20px; font-size: 14px; display: flex; align-items: center; gap: 12px; animation: slideIn 0.3s ease; }
         .alert-info { background: rgba(108, 99, 255, 0.1); color: var(--primary); border-left: 4px solid var(--primary); }
         .alert-success { background: rgba(29, 209, 161, 0.1); color: var(--success); border-left: 4px solid var(--success); }
         .alert-warning { background: rgba(255, 165, 2, 0.1); color: var(--warning); border-left: 4px solid var(--warning); }
         .alert-danger { background: rgba(255, 71, 87, 0.1); color: var(--danger); border-left: 4px solid var(--danger); }
-        .cta-box { background: linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, rgba(0, 210, 211, 0.05) 100%); padding: 20px; border-radius: var(--radius-md); margin-top: 20px; display: flex; align-items: flex-start; gap: 15px; border: 1px solid rgba(108, 99, 255, 0.1); flex-shrink: 0; }
+        .cta-box { background: linear-gradient(135deg, rgba(108, 99, 255, 0.05) 0%, rgba(0, 210, 211, 0.05) 100%); padding: 20px; border-radius: var(--radius-md); margin-top: 20px; display: flex; align-items: flex-start; gap: 12px; }
         .cta-box input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--primary); }
         .cta-text { font-size: 14px; font-weight: 500; line-height: 1.5; color: var(--dark); }
         .list-container { margin-top: 15px; }
-        .list-item { display: flex; justify-content: space-between; align-items: center; background: var(--light); padding: 15px 20px; border-radius: var(--radius-md); margin-bottom: 12px; font-size: 14px; transition: all 0.3s ease; border: 1px solid transparent; }
+        .list-item { display: flex; justify-content: space-between; align-items: center; background: var(--light); padding: 15px 20px; border-radius: var(--radius-md); margin-bottom: 12px; font-size: 14px; }
         .list-item:hover { border-color: var(--primary); background: rgba(108, 99, 255, 0.05); }
         .list-item-details { display: flex; flex-direction: column; gap: 4px; }
         .list-item-title { font-weight: 600; color: var(--dark); }
         .list-item-sub { font-size: 12px; color: var(--gray); }
         .list-item-amount { font-weight: 700; color: var(--primary); font-size: 16px; }
-        .btn-remove { background: rgba(255, 71, 87, 0.1); color: var(--danger); border: none; width: 38px; height: 38px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 18px; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; }
+        .btn-remove { background: rgba(255, 71, 87, 0.1); color: var(--danger); border: none; width: 38px; height: 38px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 20px; transition: all 0.3s ease; }
         .btn-remove:hover { background: var(--danger); color: white; transform: rotate(90deg); }
-        .section-divider { display: flex; align-items: center; gap: 15px; margin: 30px 0 20px; flex-shrink: 0; }
+        .section-divider { display: flex; align-items: center; gap: 15px; margin: 30px 0 20px; }
         .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #e1e5eb, transparent); }
         .section-title { font-size: 14px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
         .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -281,7 +281,7 @@
                     </div>
                     <div class="checkbox-item" onclick="toggleCheckbox(this)">
                         <input type="checkbox" id="exp_utilities" value="utilities" data-amount="3000">
-                        <label for="exp_utilities"><span class="icon">💡</span> Utilities (Electricity/Water)</label>
+                        <label for="exp_utilities"><span class="icon">💡</span> Utilities</label>
                     </div>
                     <div class="checkbox-item" onclick="toggleCheckbox(this)">
                         <input type="checkbox" id="exp_internet" value="internet" data-amount="1000">
@@ -289,19 +289,19 @@
                     </div>
                     <div class="checkbox-item" onclick="toggleCheckbox(this)">
                         <input type="checkbox" id="exp_entertainment" value="entertainment" data-amount="2000">
-                        <label for="exp_entertainment"><span class="icon">🎬</span> Entertainment/Streaming</label>
+                        <label for="exp_entertainment"><span class="icon">🎬</span> Entertainment</label>
                     </div>
                     <div class="checkbox-item" onclick="toggleCheckbox(this)">
                         <input type="checkbox" id="exp_healthcare" value="healthcare" data-amount="1500">
-                        <label for="exp_healthcare"><span class="icon">🏥</span> Healthcare/Medicine</label>
+                        <label for="exp_healthcare"><span class="icon">🏥</span> Healthcare</label>
                     </div>
                     <div class="checkbox-item" onclick="toggleCheckbox(this)">
                         <input type="checkbox" id="exp_education" value="education" data-amount="3000">
-                        <label for="exp_education"><span class="icon">📚</span> Education/Courses</label>
+                        <label for="exp_education"><span class="icon">📚</span> Education</label>
                     </div>
                     <div class="checkbox-item" onclick="toggleCheckbox(this)">
                         <input type="checkbox" id="exp_shopping" value="shopping" data-amount="2500">
-                        <label for="exp_shopping"><span class="icon">🛍️</span> Shopping/Clothing</label>
+                        <label for="exp_shopping"><span class="icon">🛍️</span> Shopping</label>
                     </div>
                     <div class="checkbox-item" onclick="toggleCheckbox(this)">
                         <input type="checkbox" id="exp_dining" value="dining" data-amount="2000">
@@ -425,7 +425,7 @@
         <!-- SECTION 3: MILESTONE FOCUS -->
         <div class="section-header"><div class="section-number">03</div><h3><i class="fas fa-bullseye"></i> Milestone Focus</h3></div>
         <div id="milestone-tracker-section">
-            <div class="alert alert-warning" style="margin-bottom: 20px;"><i class="fas fa-lightbulb"></i><span><strong>Pro Tip:</strong> Reduce loan amount with small savings! Even ₹500/month extra towards loans can save thousands in interest.</span></div>
+            <div class="alert alert-warning" style="margin-bottom: 20px;"><i class="fas fa-lightbulb"></i><span><strong>Pro Tip:</strong> Reduce loan amount with small savings! Even ₹500/month extra helps.</span></div>
             <div id="milestone-cards-container"></div>
             <div class="card" style="margin-top: 20px;">
                 <div class="card-title" style="margin-bottom: 15px;"><i class="fas fa-calculator"></i> Total Monthly Savings Required</div>
@@ -508,12 +508,13 @@
         <button type="button" class="btn btn-outline" onclick="showScreen('screen-financials')"><i class="fas fa-edit"></i> Edit Details</button>
     </div>
 </div>
+
 <script type="module">
     // ✅ Import Firebase
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-    // ⚠️ FIREBASE CONFIG - Replace with YOUR config from Firebase Console
+    // ⚠️ FIREBASE CONFIG
     const firebaseConfig = {
       "apiKey": "AIzaSyB2X_QYodQDt-huUpHDxuDg7K2ADPuNnSk",
       "authDomain": "unloan-6ee77.firebaseapp.com",
@@ -527,14 +528,310 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    // Make functions available globally
-    window.saveToFirebase = saveToFirebase;
-    window.saveAndFinish = saveAndFinish;
-
+    // Global state
     let isSubmitting = false;
     let userData = {};
+    let customExpenses = [];
+    let customMilestones = [];
 
-    // ✅ Save to Firebase
+    // ===== FORM HANDLERS =====
+    
+    document.getElementById('entryForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('✅ Entry form submitted');
+        
+        userData.name = document.getElementById('name').value;
+        userData.age = parseInt(document.getElementById('age').value);
+        userData.mobile = document.getElementById('mobile').value;
+        
+        console.log('📋 Entry data:', userData);
+        showScreen('screen-financials');
+    });
+
+    document.getElementById('financialForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        console.log('✅ Financial form submitted');
+        
+        // Basic info
+        userData.income = parseInt(document.getElementById('income').value) || 0;
+        userData.loanEmi = parseInt(document.getElementById('loanEmi').value) || 0;
+        userData.insuranceTotal = parseInt(document.getElementById('insuranceTotal').value) || 0;
+        userData.rent = parseInt(document.getElementById('rent').value) || 0;
+        userData.groceries = parseInt(document.getElementById('groceries').value) || 0;
+        userData.maritalStatus = document.getElementById('maritalStatus').value;
+        userData.dependents = parseInt(document.getElementById('dependents').value) || 0;
+        
+        // Collect checked expenses
+        const checkedExpenses = {};
+        let totalExpenseAmount = userData.loanEmi + userData.insuranceTotal + userData.rent + userData.groceries;
+        
+        document.querySelectorAll('#expenseCheckboxes input[type="checkbox"]:checked').forEach(cb => {
+            const amount = parseInt(cb.dataset.amount) || 0;
+            checkedExpenses[cb.value] = amount;
+            totalExpenseAmount += amount;
+        });
+        
+        // Add custom expenses
+        customExpenses.forEach(exp => {
+            totalExpenseAmount += exp.amount;
+        });
+        
+        userData.expenses = checkedExpenses;
+        userData.customExpenses = customExpenses;
+        userData.totalExpenses = totalExpenseAmount;
+        
+        // Collect milestones
+        const milestones = [];
+        document.querySelectorAll('#milestoneCheckboxes input[type="checkbox"]:checked').forEach(cb => {
+            milestones.push({
+                name: cb.value,
+                amount: parseInt(cb.dataset.amount),
+                years: parseInt(cb.dataset.years)
+            });
+        });
+        
+        // Add custom milestones
+        customMilestones.forEach(m => milestones.push(m));
+        
+        userData.milestones = milestones;
+        userData.disposable = userData.income - totalExpenseAmount;
+        userData.discussWithExpert = document.getElementById('discussCheck').checked;
+        userData.timestamp = new Date().toISOString();
+        
+        console.log('📋 Financial data:', userData);
+        showScreen('screen-dashboard');
+        generateDashboard();
+    });
+
+    // ===== SCREEN NAVIGATION =====
+    window.showScreen = function(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+        console.log('📱 Switched to:', screenId);
+    };
+
+    // ===== CHECKBOX HANDLING =====
+    window.toggleCheckbox = function(element) {
+        const checkbox = element.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+        element.classList.toggle('selected', checkbox.checked);
+    };
+
+    // ===== CUSTOM EXPENSE HANDLING =====
+    window.addCustomExpense = function() {
+        const name = prompt('Expense name:');
+        if (!name) return;
+        
+        const amount = parseInt(prompt('Monthly amount (₹):')) || 0;
+        if (amount <= 0) {
+            alert('Please enter a valid amount');
+            return;
+        }
+        
+        customExpenses.push({ name, amount });
+        renderCustomExpenses();
+    };
+
+    function renderCustomExpenses() {
+        const list = document.getElementById('customExpensesList');
+        list.innerHTML = '';
+        
+        customExpenses.forEach((exp, idx) => {
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.innerHTML = `
+                <div class="list-item-details">
+                    <div class="list-item-title">${exp.name}</div>
+                    <div class="list-item-sub">Custom expense</div>
+                </div>
+                <div class="list-item-amount">₹${exp.amount.toLocaleString('en-IN')}</div>
+                <button class="btn-remove" type="button" onclick="removeCustomExpense(${idx})">×</button>
+            `;
+            list.appendChild(item);
+        });
+    }
+
+    window.removeCustomExpense = function(idx) {
+        customExpenses.splice(idx, 1);
+        renderCustomExpenses();
+    };
+
+    // ===== CUSTOM MILESTONE HANDLING =====
+    window.addCustomMilestone = function() {
+        const name = prompt('Goal name:');
+        if (!name) return;
+        
+        const amount = parseInt(prompt('Target amount (₹):')) || 0;
+        if (amount <= 0) {
+            alert('Please enter a valid amount');
+            return;
+        }
+        
+        const years = parseInt(prompt('Timeline (years):')) || 1;
+        if (years <= 0) {
+            alert('Please enter valid years');
+            return;
+        }
+        
+        customMilestones.push({ name, amount, years });
+        renderCustomMilestones();
+    };
+
+    function renderCustomMilestones() {
+        const list = document.getElementById('milestonesList');
+        list.innerHTML = '';
+        
+        customMilestones.forEach((m, idx) => {
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.innerHTML = `
+                <div class="list-item-details">
+                    <div class="list-item-title">${m.name}</div>
+                    <div class="list-item-sub">${m.years} years</div>
+                </div>
+                <div class="list-item-amount">₹${m.amount.toLocaleString('en-IN')}</div>
+                <button class="btn-remove" type="button" onclick="removeCustomMilestone(${idx})">×</button>
+            `;
+            list.appendChild(item);
+        });
+    }
+
+    window.removeCustomMilestone = function(idx) {
+        customMilestones.splice(idx, 1);
+        renderCustomMilestones();
+    };
+
+    // ===== DASHBOARD GENERATION =====
+    window.generateDashboard = function() {
+        if (!userData.income || userData.income <= 0) {
+            console.warn('⚠️ No income data');
+            return;
+        }
+        
+        // Calculate Health Score
+        const savingsRate = userData.disposable > 0 ? Math.round((userData.disposable / userData.income) * 100) : 0;
+        const emiBurden = userData.loanEmi > 0 ? Math.round((userData.loanEmi / userData.income) * 100) : 0;
+        const healthScore = Math.max(20, Math.min(100, 50 + savingsRate - emiBurden));
+        
+        // Update health section
+        document.getElementById('ai-score').textContent = healthScore;
+        document.getElementById('score-range-fill').style.width = (healthScore / 100 * 100) + '%';
+        document.getElementById('metric-surplus').textContent = '₹' + Math.max(0, userData.disposable).toLocaleString('en-IN');
+        document.getElementById('metric-savings').textContent = savingsRate + '%';
+        document.getElementById('metric-emi').textContent = emiBurden + '%';
+        document.getElementById('metric-goals').textContent = (userData.milestones?.length || 0);
+        
+        // AI Summary
+        let summary = '';
+        if (healthScore >= 80) summary = '🎉 Excellent! You\'re in great financial health!';
+        else if (healthScore >= 60) summary = '👍 Good progress! Keep it up!';
+        else if (healthScore >= 40) summary = '⚠️ Moderate - Focus on reducing expenses.';
+        else summary = '🆘 Urgent - Consider cutting costs.';
+        
+        document.getElementById('ai-summary-text').textContent = summary;
+        
+        // Insurance recommendations
+        const dependents = userData.dependents || 0;
+        const recommendedHealthPremium = dependents > 0 ? 500 : 300;
+        const recommendedTermPremium = userData.income > 0 ? Math.round(userData.income * 0.005) : 200;
+        const insuranceTotal = recommendedHealthPremium + recommendedTermPremium;
+        
+        document.getElementById('insurance-investment-amount').textContent = '₹' + insuranceTotal.toLocaleString('en-IN');
+        document.getElementById('health-ins-status').textContent = `Recommended: ₹${recommendedHealthPremium.toLocaleString('en-IN')}/mo`;
+        document.getElementById('term-ins-status').textContent = `Recommended: ₹${recommendedTermPremium.toLocaleString('en-IN')}/mo`;
+        
+        // Milestones
+        renderMilestones();
+        
+        // Investment recommendations
+        renderInvestmentRecommendations();
+    };
+
+    function renderMilestones() {
+        const container = document.getElementById('milestone-cards-container');
+        container.innerHTML = '';
+        
+        if (!userData.milestones || userData.milestones.length === 0) {
+            document.getElementById('no-milestones-message').style.display = 'block';
+            document.getElementById('milestone-tracker-section').style.display = 'none';
+            return;
+        }
+        
+        document.getElementById('no-milestones-message').style.display = 'none';
+        document.getElementById('milestone-tracker-section').style.display = 'block';
+        
+        let totalMonthly = 0;
+        
+        userData.milestones.forEach((m, idx) => {
+            const monthlyNeeded = Math.round(m.amount / (m.years * 12));
+            totalMonthly += monthlyNeeded;
+            
+            const futureDate = new Date();
+            futureDate.setFullYear(futureDate.getFullYear() + m.years);
+            
+            const card = document.createElement('div');
+            card.className = 'milestone-card success';
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div>
+                        <div class="card-title">${m.name}</div>
+                        <div class="card-subtitle">Save by: ${futureDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'short' })}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 20px; font-weight: 700; color: var(--primary);">₹${m.amount.toLocaleString('en-IN')}</div>
+                        <div style="font-size: 12px; color: var(--gray);">₹${monthlyNeeded.toLocaleString('en-IN')}/mo</div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        
+        document.getElementById('milestone-total-amount').textContent = '₹' + totalMonthly.toLocaleString('en-IN') + '/mo';
+        document.getElementById('summary-milestones').textContent = '₹' + totalMonthly.toLocaleString('en-IN');
+        
+        // Breakdown
+        const breakdown = document.getElementById('milestone-breakdown');
+        breakdown.innerHTML = '';
+        userData.milestones.forEach(m => {
+            const monthlyNeeded = Math.round(m.amount / (m.years * 12));
+            const item = document.createElement('div');
+            item.className = 'milestone-breakdown-item';
+            item.innerHTML = `
+                <span>${m.name}</span>
+                <span>₹${monthlyNeeded.toLocaleString('en-IN')}</span>
+            `;
+            breakdown.appendChild(item);
+        });
+    }
+
+    function renderInvestmentRecommendations() {
+        const shortTermMonthly = Math.max(5000, Math.round(userData.disposable * 0.3));
+        const longTermMonthly = Math.max(2000, Math.round(userData.disposable * 0.2));
+        const insuranceMonthly = 800; // default
+        
+        document.getElementById('short-term-amount').textContent = '₹' + shortTermMonthly.toLocaleString('en-IN') + '/mo';
+        document.getElementById('long-term-amount').textContent = '₹' + longTermMonthly.toLocaleString('en-IN') + '/mo';
+        
+        document.getElementById('short-term-rec').textContent = `Build an emergency fund of 6 months expenses. Current target: ₹${(userData.totalExpenses * 6).toLocaleString('en-IN')}`;
+        document.getElementById('long-term-rec').textContent = `Invest for wealth creation and retirement. At age ${userData.age}, target ₹${(userData.income * 100).toLocaleString('en-IN')} by age 50.`;
+        
+        document.getElementById('short-bar').style.width = '30%';
+        document.getElementById('long-bar').style.width = '45%';
+        
+        document.getElementById('short-action').textContent = '✓ Build emergency fund first';
+        document.getElementById('long-action').textContent = '✓ Start investing in index funds';
+        
+        // Summary
+        document.getElementById('summary-insurance').textContent = '₹' + insuranceMonthly.toLocaleString('en-IN');
+        document.getElementById('summary-short').textContent = '₹' + shortTermMonthly.toLocaleString('en-IN');
+        document.getElementById('summary-long').textContent = '₹' + longTermMonthly.toLocaleString('en-IN');
+        
+        const totalMonthly = insuranceMonthly + shortTermMonthly + longTermMonthly + (userData.milestones?.reduce((sum, m) => sum + Math.round(m.amount / (m.years * 12)), 0) || 0);
+        document.getElementById('summary-total').textContent = '₹' + totalMonthly.toLocaleString('en-IN') + '/mo';
+    }
+
+    // ===== FIREBASE OPERATIONS =====
+    
     async function saveToFirebase() {
         if (isSubmitting) {
             console.log('⚠️ Already submitting, skipping...');
@@ -542,17 +839,9 @@
         }
         isSubmitting = true;
 
-        console.group('📤 Firebase Save Debug');
-        console.log('📋 User Data:', {
-            name: userData.name,
-            age: userData.age,
-            income: userData.income,
-            disposable: userData.disposable
-        });
-
         try {
             console.log('📤 Saving to Firestore...');
-
+            
             const docRef = await addDoc(collection(db, 'submissions'), {
                 ...userData,
                 timestamp: serverTimestamp(),
@@ -561,10 +850,10 @@
 
             console.log('✅ Save successful! Document ID:', docRef.id);
 
+            // Local backup
             localStorage.setItem('unloanLastSync', new Date().toISOString());
             localStorage.setItem('unloanData', JSON.stringify(userData));
 
-            console.groupEnd();
             return true;
 
         } catch (error) {
@@ -574,13 +863,15 @@
             if (error.code === 'permission-denied') {
                 userMessage = 'Permission denied. Check Firestore rules.';
             } else if (error.code === 'unavailable') {
-                userMessage = 'Cannot connect to Firebase. Check internet.';
+                userMessage = 'Cannot connect to Firebase. Check internet connection.';
             }
 
-            alert(`⚠️ ${userMessage}\n\n✅ Data saved LOCALLY on this device.`);
+            alert(`⚠️ ${userMessage}\n\n✅ Data saved locally on this device.`);
 
+            // Still save locally
             localStorage.setItem('unloanLastSync', new Date().toISOString());
-            console.groupEnd();
+            localStorage.setItem('unloanData', JSON.stringify(userData));
+
             return false;
 
         } finally {
@@ -588,8 +879,7 @@
         }
     }
 
-    // ✅ Save and Finish
-    async function saveAndFinish() {
+    window.saveAndFinish = async function() {
         console.log('💾 Save & Finish clicked');
         localStorage.setItem('unloanData', JSON.stringify(userData));
 
@@ -604,19 +894,59 @@
         const cloudSuccess = await saveToFirebase();
 
         if (cloudSuccess) {
-            alert('✅ Data saved to cloud!\n\nView in admin dashboard.');
+            alert('✅ Data saved to cloud!\n\nThank you for using UNLOAN!');
         } else {
-            alert('⚠️ Cloud sync failed\n\n✅ Data saved LOCALLY on this device.');
+            alert('⚠️ Cloud sync failed\n\n✅ Data saved locally on this device.');
         }
 
         if (saveBtn) {
             saveBtn.innerHTML = originalText;
             saveBtn.disabled = false;
         }
-    }
+    };
 
-    // Export other functions you need
-    window.exportToCSV = exportToCSV;
+    // ===== CSV EXPORT =====
+    window.exportToCSV = function() {
+        const csvContent = [
+            ['UNLOAN - Financial Plan Export'],
+            ['Generated on:', new Date().toLocaleDateString()],
+            [''],
+            ['PERSONAL INFORMATION'],
+            ['Name', userData.name],
+            ['Age', userData.age],
+            ['Mobile', userData.mobile],
+            ['Marital Status', userData.maritalStatus],
+            ['Dependents', userData.dependents],
+            [''],
+            ['FINANCIAL SUMMARY'],
+            ['Monthly Income', '₹' + userData.income.toLocaleString('en-IN')],
+            ['Total Expenses', '₹' + userData.totalExpenses.toLocaleString('en-IN')],
+            ['Monthly Surplus', '₹' + Math.max(0, userData.disposable).toLocaleString('en-IN')],
+            [''],
+            ['EXPENSE BREAKDOWN'],
+            ['Loan EMIs', '₹' + userData.loanEmi.toLocaleString('en-IN')],
+            ['Insurance', '₹' + userData.insuranceTotal.toLocaleString('en-IN')],
+            ['Rent/Mortgage', '₹' + userData.rent.toLocaleString('en-IN')],
+            ['Groceries & Food', '₹' + userData.groceries.toLocaleString('en-IN')],
+            [''],
+            ['FINANCIAL GOALS'],
+            ...(userData.milestones?.map(m => [m.name, '₹' + m.amount.toLocaleString('en-IN'), m.years + ' years']) || [['No goals added']])
+        ].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+        
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `unloan-plan-${new Date().getTime()}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        console.log('📥 CSV exported');
+    };
+
+    // ===== INITIALIZATION =====
+    console.log('✅ UNLOAN App Initialized');
 </script>
 </body>
 </html>
